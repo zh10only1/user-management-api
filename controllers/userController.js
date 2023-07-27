@@ -109,6 +109,13 @@ const userController = {
         }
 
         try {
+            await Log.destroy({ where: { user_id: user.id } })
+        } catch (error) {
+            console.log('cannot delete logs associated with the user', error);
+            res.status(500).json({ message: 'server error.' })
+        }
+
+        try {
             await user.destroy();
         } catch (error) {
             console.error('cannot delete user:', error);

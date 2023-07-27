@@ -73,6 +73,7 @@ const logController = {
         let logs;
         try {
             logs = await Log.findAll({
+                where: { user_id: user.id },
                 order: [['createdAt', 'DESC']],
                 limit: 5
             });
